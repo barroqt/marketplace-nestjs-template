@@ -45,16 +45,10 @@ export class AuthService {
     console.log(user);
 
     const [salt, storedHash] = user.password.split('.');
-    console.log(salt);
-    console.log('1');
-    console.log(storedHash);
 
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 
     if (storedHash !== hash.toString('hex')) {
-      console.log('2');
-      console.log(storedHash);
-      console.log(hash.toString('hex'));
       throw new BadRequestException('Bad password');
     }
 
