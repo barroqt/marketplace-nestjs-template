@@ -16,7 +16,7 @@ export class UsersService {
     if (!id) {
       return null;
     }
-    return this.repo.findOneBy({ id });
+    return this.repo.findOne({ id });
   }
 
   find(email: string) {
@@ -25,7 +25,7 @@ export class UsersService {
 
   // remove() triggers hooks in the entity, delete() does not
   async remove(id: number) {
-    const user = await this.repo.findOneBy({ id });
+    const user = await this.repo.findOne({ id });
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -34,7 +34,7 @@ export class UsersService {
 
   // Partial is good way to update only the fields that are passed instead of passing every field as an argument
   async update(id: number, attrs: Partial<User>) {
-    const user = await this.repo.findOneBy({ id });
+    const user = await this.repo.findOne({ id });
     if (!user) {
       throw new NotFoundException('User not found');
     }
